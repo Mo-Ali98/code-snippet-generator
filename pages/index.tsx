@@ -1,91 +1,98 @@
+import classNames from "classnames";
 import { useState } from "react";
 
-const Home = () => {
-  const [userInput, setUserInput] = useState("");
-  const [apiOutput, setApiOutput] = useState<String>("");
-  const [isGenerating, setIsGenerating] = useState<Boolean>(false);
+const Home: React.FC = () => {
+  const [userInput, setUserInput] = useState<string>("");
+  const [apiOutput, setApiOutput] = useState<string>("");
+  const [isLoading, setLoading] = useState<Boolean>(false);
 
   const callGenerateEndpoint = async () => {
-    setIsGenerating(true);
+    setLoading(true);
 
-    console.log("Calling OpenAI...");
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userInput }),
-    });
+    if (apiOutput) {
+      setApiOutput("");
+    }
 
-    const data = await response.json();
-    const { output } = data;
-    console.log("OpenAI replied...", output.text);
+    try {
+      console.log("Calling OpenAI...");
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userInput }),
+      });
 
-    setApiOutput(`${output.text}`);
-    setIsGenerating(false);
-  };
+      const data = await response.json();
+      const { output } = data;
+      const text: string = output.text;
 
-  const onUserChangedText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
-    setUserInput(e.target.value);
+      console.log("OpenAI replied...", text);
+
+      setApiOutput(text);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setApiOutput("An error has occured");
+    }
   };
 
   const renderOuput = () => {
     if (!apiOutput) return null;
 
     return (
-      <div className="output">
-        <div className="output-header-container">
-          <div className="output-header">
-            <h3>Output</h3>
-          </div>
-        </div>
-        <div className="output-content">
-          <p>{apiOutput}</p>
-        </div>
+      <div className="flex flex-col items-center gap-3">
+        <h3 className="text-white text-2xl font-bold tracking-tight">Output</h3>
+
+        <p className="text-neutral-500 text-xl font-normal text-center">
+          {apiOutput}
+        </p>
       </div>
     );
   };
 
   return (
-    <div className="root">
-      <div className="container">
-        <div className="header">
-          <div className="header-title">
-            <h1>Generate a story!</h1>
-          </div>
-          <div className="header-subtitle">
-            <h2>
-              Input prompts such as character, settings and plot, and we will
-              generate a story for you!
-            </h2>
-          </div>
+    <div className="container mx-auto min-h-screen">
+      <div className="flex flex-col items-center p-5 gap-10 flex-nowrap">
+        <div className="flex flex-col items-center p-3 gap-4 flex-nowrap text-center">
+          <h1 className="text-white text-7xl font-bold tracking-tight">
+            Generate a story!
+          </h1>
+          <p className="text-neutral-400 text-xl font-normal">
+            Input prompts such as character, settings and plot, and we will
+            generate a story for you!
+          </p>
         </div>
+
         <div className="prompt-container">
           <textarea
-            className="prompt-box"
+            className={classNames(
+              "prompt-textarea",
+              "text-md xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
+            )}
             placeholder={
               "Example:\nMohamed: A kid with powers\nSetting: a poor, broken kingdom that's been destroyed by Furqan.\nFurqan: the villain of the story, he's a mysterious figure with crazy powers.\nPlot: Farza wants to beat Furqan and take the kingdom back.\nStory:"
             }
             value={userInput}
-            onChange={(e) => onUserChangedText(e)}
+            onChange={(e) => setUserInput(e.target.value)}
           />
 
-          <div className="prompt-buttons">
-            <a
-              className={
-                isGenerating ? "generate-button loading" : "generate-button"
-              }
+          <div className={classNames("prompt-buttons")}>
+            <button
+              className={classNames(
+                "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded",
+                {
+                  ["opacity-50"]: isLoading,
+                }
+              )}
               onClick={callGenerateEndpoint}
             >
-              <div className="generate">
-                {isGenerating ? (
-                  <span className="loader"></span>
-                ) : (
-                  <p>Generate</p>
-                )}
-              </div>
-            </a>
+              {isLoading ? (
+                <span className="loader"></span>
+              ) : (
+                <p className="text-white font-normal">Generate</p>
+              )}
+            </button>
           </div>
 
           {renderOuput()}
