@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
-import { InputArea } from "../components/input-area";
+import { InputArea } from "../components/input-area/input-area";
 
 const Home: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");

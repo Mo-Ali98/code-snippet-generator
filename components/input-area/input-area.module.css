@@ -1,0 +1,60 @@
+.prompt-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  gap: 16px;
+  padding: 12px;
+  flex-wrap: nowrap;
+  width: 100%;
+  width: min-content;
+}
+
+.prompt-textarea {
+  display: flex;
+  place-content: flex-start;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  gap: 10px;
+  padding: 20px;
+
+  border: 1px rgba(255, 255, 255, 0.1) solid;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+
+  overflow: auto;
+  outline: none;
+  resize: none;
+  text-decoration: none;
+  text-transform: none;
+
+  font-family: "Manrope", sans-serif;
+}
+
+.prompt-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 2px solid #fff;
+  border-right: 2px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

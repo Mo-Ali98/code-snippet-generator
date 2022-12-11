@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ReactNode } from "react";
+import styles from "./input-area.module.css";
 
 interface InputAreaProps {
   currentInput: string;
@@ -17,10 +18,10 @@ export const InputArea: React.FC<InputAreaProps> = ({
   children,
 }) => {
   return (
-    <div className="prompt-container">
+    <div className={styles["prompt-container"]}>
       <textarea
         className={classNames(
-          "prompt-textarea",
+          styles["prompt-textarea"],
           "text-md xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
         )}
         placeholder={
@@ -30,7 +31,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
         onChange={(e) => setInput(e.target.value)}
       />
 
-      <div className={classNames("prompt-buttons")}>
+      <div className={classNames(styles["prompt-buttons"])}>
         <button
           className={classNames(
             "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded",
@@ -41,7 +42,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
           onClick={onGenerate}
         >
           {loading ? (
-            <span className="loader"></span>
+            <span className={styles["loader"]}></span>
           ) : (
             <p className="text-white font-normal">Generate</p>
           )}
