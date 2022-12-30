@@ -3,11 +3,15 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
 import { InputArea } from "../components/input-area/input-area";
+import { CopyBlock, dracula } from "react-code-blocks";
+import Select from "react-select";
+import { languageOptions, LanguageOption } from "../assets/select-data";
 
 const Home: React.FC = () => {
   const [userInput, setUserInput] = useState<string>("");
   const [apiOutput, setApiOutput] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [language, setLanguage] = useState<LanguageOption>(languageOptions[0]);
 
   const callGenerateEndpoint = async () => {
     setLoading(true);
@@ -45,22 +49,52 @@ const Home: React.FC = () => {
 
     return (
       <div className="flex flex-col items-center gap-3">
-        <h3 className="text-white text-2xl font-bold tracking-tight">Output</h3>
+        <div className="flex flex-row justify-between min-w-full">
+          <h3 className="text-white text-2xl font-bold tracking-tight">
+            Output
+          </h3>
 
-        <p className="text-neutral-500 text-xl font-normal text-center">
-          {apiOutput}
-        </p>
+          <Select
+            className="w-[150px]"
+            classNamePrefix="select"
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 6,
+              colors: {
+                ...theme.colors,
+                primary25: "#8b5cf6",
+                primary: "#a855f7",
+              },
+            })}
+            isSearchable={true}
+            value={language}
+            name="language"
+            options={languageOptions}
+            onChange={(e) => setLanguage(e as LanguageOption)}
+          />
+        </div>
+
+        <div className="xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px]">
+          <CopyBlock
+            text={apiOutput}
+            language={language.value}
+            showLineNumbers={true}
+            theme={dracula}
+            wrapLines={true}
+            codeBlock
+          />
+        </div>
 
         <button
           className={classNames(
-            "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+            "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded my-3"
           )}
           onClick={() => {
             setApiOutput("");
             setUserInput("");
           }}
         >
-          Try Again!
+          Generate something new!
         </button>
       </div>
     );
