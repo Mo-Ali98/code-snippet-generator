@@ -25,7 +25,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
           "text-md xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
         )}
         placeholder={
-          "Example:\nMohamed: A kid with powers\nSetting: a poor, broken kingdom that's been destroyed by Furqan.\nFurqan: the villain of the story, he's a mysterious figure with crazy powers.\nPlot: Farza wants to beat Furqan and take the kingdom back.\nStory:"
+          "Example: Generate a JSX code snippet of a button that is lightly rounded and has a grey background colour"
         }
         value={currentInput}
         onChange={(e) => setInput(e.target.value)}
@@ -48,7 +48,6 @@ export const InputArea: React.FC<InputAreaProps> = ({
           )}
         </button>
       </div>
-
       {children}
     </div>
   );
