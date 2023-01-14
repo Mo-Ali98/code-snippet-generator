@@ -22,7 +22,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
       <textarea
         className={classNames(
           styles["prompt-textarea"],
-          "text-md xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
+          "text-md xs:min-w-[350px] min-h-[250px] sm:min-w-[450px] md:min-w-[600px] max-w-lg lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
         )}
         placeholder={
           "Example: Generate a JSX code snippet of a button that is lightly rounded and has a grey background colour"

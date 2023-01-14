@@ -74,7 +74,7 @@ const Home: React.FC = () => {
           />
         </div>
 
-        <div className="xs:min-w-[350px] min-h-[250px] md:min-w-[600px] lg:min-w-[700px]">
+        <div className="xs:min-w-[350px] min-h-[250px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
           <CopyBlock
             text={apiOutput}
             language={language.value}
