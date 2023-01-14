@@ -49,29 +49,34 @@ const Home: React.FC = () => {
 
     return (
       <div className="flex flex-col items-center gap-3">
-        <div className="flex flex-row justify-between min-w-full">
-          <h3 className="text-white text-2xl font-bold tracking-tight">
+        <div className="flex flex-row justify-between min-w-full items-center">
+          <h3 className="text-2xl font-bold tracking-tight text-white">
             Output
           </h3>
 
-          <Select
-            className="w-[150px]"
-            classNamePrefix="select"
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 6,
-              colors: {
-                ...theme.colors,
-                primary25: "#8b5cf6",
-                primary: "#a855f7",
-              },
-            })}
-            isSearchable={true}
-            value={language}
-            name="language"
-            options={languageOptions}
-            onChange={(e) => setLanguage(e as LanguageOption)}
-          />
+          <div className="flex flex-row gap-2 items-center">
+            <h4 className="text-xl font-bold tracking-tight text-white">
+              language:
+            </h4>
+            <Select
+              className="w-[150px]"
+              classNamePrefix="select"
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 6,
+                colors: {
+                  ...theme.colors,
+                  primary25: "#8b5cf6",
+                  primary: "#a855f7",
+                },
+              })}
+              isSearchable={true}
+              value={language}
+              name="language"
+              options={languageOptions}
+              onChange={(e) => setLanguage(e as LanguageOption)}
+            />
+          </div>
         </div>
 
         <div className="xs:min-w-[350px] min-h-[250px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
