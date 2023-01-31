@@ -3,11 +3,20 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
 import { InputArea } from "../components/input-area/input-area";
-import { CopyBlock, dracula } from "react-code-blocks";
+import {
+  a11yDark,
+  a11yLight,
+  atomOneDark,
+  atomOneLight,
+  CopyBlock,
+  dracula,
+} from "react-code-blocks";
 import Select from "react-select";
 import { languageOptions, LanguageOption } from "../assets/select-data";
+import { useTheme } from "next-themes";
 
 const Home: React.FC = () => {
+  const { theme } = useTheme();
   const [userInput, setUserInput] = useState<string>("");
   const [apiOutput, setApiOutput] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -44,22 +53,22 @@ const Home: React.FC = () => {
     }
   };
 
-  const renderOuput = () => {
+  const renderOutput = () => {
     if (!apiOutput) return null;
 
     return (
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-row justify-between min-w-full items-center">
-          <h3 className="text-2xl font-bold tracking-tight text-white">
+          <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
             Output
           </h3>
 
           <div className="flex flex-row gap-2 items-center">
-            <h4 className="text-xl font-bold tracking-tight text-white">
+            <h4 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
               language:
             </h4>
             <Select
-              className="w-[150px]"
+              className="w-[150px] text-zinc-900"
               classNamePrefix="select"
               theme={(theme) => ({
                 ...theme,
@@ -81,10 +90,10 @@ const Home: React.FC = () => {
 
         <div className="xs:min-w-[350px] min-h-[250px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
           <CopyBlock
-            text={apiOutput}
+            text={apiOutput.trim()}
             language={language.value}
             showLineNumbers={true}
-            theme={dracula}
+            theme={theme === "dark" ? atomOneDark : atomOneLight}
             wrapLines={true}
             codeBlock
           />
@@ -92,7 +101,7 @@ const Home: React.FC = () => {
 
         <button
           className={classNames(
-            "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded my-3"
+            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900"
           )}
           onClick={() => {
             setApiOutput("");
@@ -110,7 +119,7 @@ const Home: React.FC = () => {
       <Container>
         <Header />
 
-        {renderOuput()}
+        {renderOutput()}
       </Container>
     );
   }
@@ -124,7 +133,7 @@ const Home: React.FC = () => {
         loading={isLoading}
         onGenerate={callGenerateEndpoint}
       >
-        {renderOuput()}
+        {renderOutput()}
       </InputArea>
     </Container>
   );
