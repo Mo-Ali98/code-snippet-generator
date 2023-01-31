@@ -22,7 +22,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
       <textarea
         className={classNames(
           styles["prompt-textarea"],
-          "text-md xs:min-w-[350px] min-h-[250px] sm:min-w-[450px] md:min-w-[600px] max-w-lg lg:min-w-[700px] xxl:min-w-[900px] text-neutral-400 focus:border-neutral-400"
+          "text-md xs:min-w-[350px] min-h-[250px] sm:min-w-[450px] md:min-w-[600px] max-w-lg lg:min-w-[700px] xxl:min-w-[900px] rounded-xl text-zinc-900 bg-zinc-100 dark:text-white dark:bg-zinc-800 dark:focus:border-white dark:focus:border-solid dark:focus:border-[1px]"
         )}
         placeholder={
           "Example: Generate a JSX code snippet of a button that is lightly rounded and has a grey background colour"
@@ -34,7 +34,7 @@ export const InputArea: React.FC<InputAreaProps> = ({
       <div className={classNames(styles["prompt-buttons"])}>
         <button
           className={classNames(
-            "bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded",
+            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900",
             {
               ["opacity-50"]: loading,
             }
@@ -42,9 +42,14 @@ export const InputArea: React.FC<InputAreaProps> = ({
           onClick={onGenerate}
         >
           {loading ? (
-            <span className={styles["loader"]}></span>
+            <span
+              className={classNames(
+                styles["loader"],
+                "border-t-zinc-900 border-r-zinc-900 dark:border-t-white"
+              )}
+            ></span>
           ) : (
-            <p className="text-white font-normal">Generate</p>
+            <p className="font-normal">Generate</p>
           )}
         </button>
       </div>
