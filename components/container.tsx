@@ -25,9 +25,9 @@ export const Container: React.FC<ContainerProps> = ({ children }) => {
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
         {theme === "dark" ? (
-          <SunIcon width={24} height={24} className="text-white" />
+          <SunIcon width={28} height={28} className="text-white" />
         ) : (
-          <MoonIcon width={24} height={24} className="text-zinc-900" />
+          <MoonIcon width={28} height={28} className="text-zinc-900" />
         )}
       </button>
       <div className="flex flex-col items-center p-5 gap-10 flex-nowrap justify-center w-full max-w-5xl mx-auto">

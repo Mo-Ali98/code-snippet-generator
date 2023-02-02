@@ -59,14 +59,11 @@ const Home: React.FC = () => {
     return (
       <div className="flex flex-col items-center gap-3">
         <div className="flex flex-row justify-between min-w-full items-center">
-          <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+          <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white xs:text-md">
             Output
           </h3>
 
           <div className="flex flex-row gap-2 items-center">
-            <h4 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              language:
-            </h4>
             <Select
               className="w-[150px] text-zinc-900"
               classNamePrefix="select"
@@ -118,7 +115,6 @@ const Home: React.FC = () => {
     return (
       <Container>
         <Header />
-
         {renderOutput()}
       </Container>
     );
@@ -132,6 +128,7 @@ const Home: React.FC = () => {
         setInput={setUserInput}
         loading={isLoading}
         onGenerate={callGenerateEndpoint}
+        disabled={isLoading}
       >
         {renderOutput()}
       </InputArea>
