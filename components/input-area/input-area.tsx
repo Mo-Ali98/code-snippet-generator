@@ -10,13 +10,9 @@ interface InputAreaProps {
   children: ReactNode;
 }
 
-export const InputArea: React.FC<InputAreaProps> = ({
-  setInput,
-  currentInput,
-  loading,
-  onGenerate,
-  children,
-}) => {
+export const InputArea: React.FC<
+  InputAreaProps & React.HTMLProps<HTMLTextAreaElement>
+> = ({ setInput, currentInput, loading, onGenerate, children, ...props }) => {
   return (
     <div className={styles["prompt-container"]}>
       <textarea
@@ -29,17 +25,16 @@ export const InputArea: React.FC<InputAreaProps> = ({
         }
         value={currentInput}
         onChange={(e) => setInput(e.target.value)}
+        {...props}
       />
 
       <div className={classNames(styles["prompt-buttons"])}>
         <button
           className={classNames(
-            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900",
-            {
-              ["opacity-50"]: loading,
-            }
+            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900"
           )}
           onClick={onGenerate}
+          disabled={loading}
         >
           {loading ? (
             <span
