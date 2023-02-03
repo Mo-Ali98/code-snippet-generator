@@ -17,8 +17,16 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta property="og:title" content="GPT-3 Writer" key="title" />
-          <meta property="og:description" key="description" />
+          <meta
+            property="og:title"
+            content="Generate code snippets!"
+            key="title"
+          />
+          <meta
+            property="og:description"
+            key="description"
+            content="Generate code snippets using AI!"
+          />
           <meta property="og:image" />
           <meta name="twitter:card" content="summary_large_image"></meta>
           <link
