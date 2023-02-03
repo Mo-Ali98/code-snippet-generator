@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ReactNode } from "react";
-import styles from "./input-area.module.css";
+import styles from "./input-area.module.scss";
 
 interface InputAreaProps {
   currentInput: string;
