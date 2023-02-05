@@ -7,7 +7,8 @@ export const Header: React.FC = () => {
         Generate code snippets!
       </h1>
       <p className="text-zinc-800 dark:text-zinc-300 text-xl font-normal">
-        Input a text describing a code snippet you want!
+        Describe a piece of code you want to generate, and watch the magic
+        happen 🪄
       </p>
     </div>
   );
