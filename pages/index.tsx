@@ -3,20 +3,16 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
 import { InputArea } from "../components/input-area/input-area";
-import {
-  a11yDark,
-  a11yLight,
-  atomOneDark,
-  atomOneLight,
-  CopyBlock,
-  dracula,
-} from "react-code-blocks";
+import { atomOneDark, atomOneLight, CopyBlock } from "react-code-blocks";
 import Select from "react-select";
 import { languageOptions, LanguageOption } from "../assets/select-data";
 import { useTheme } from "next-themes";
+import { useApp } from "../contexts/app-context";
+import { Result } from "../interfaces/results";
 
 const Home: React.FC = () => {
   const { theme } = useTheme();
+  const { setStoredResults, storedResults } = useApp();
   const [userInput, setUserInput] = useState<string>("");
   const [apiOutput, setApiOutput] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -43,13 +39,18 @@ const Home: React.FC = () => {
       const { output } = data;
       const text: string = output.text;
 
-      console.log("OpenAI replied...", text);
-
       setApiOutput(text);
+
+      const newResult: Result = {
+        prompt: userInput.trim(),
+        response: text.trim(),
+      };
+
+      setStoredResults([...storedResults, newResult]);
       setLoading(false);
     } catch (error) {
       console.error(error);
-      setApiOutput("An error has occured");
+      setApiOutput("An error has occurred");
     }
   };
 
