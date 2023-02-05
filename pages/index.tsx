@@ -46,7 +46,14 @@ const Home: React.FC = () => {
         response: text.trim(),
       };
 
-      setStoredResults([...storedResults, newResult]);
+      const updateResults = [...storedResults, newResult];
+      setStoredResults(updateResults);
+
+      localStorage.setItem(
+        "generate-code-results",
+        JSON.stringify(updateResults)
+      );
+
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -121,6 +128,41 @@ const Home: React.FC = () => {
     );
   }
 
+  const renderPrevResults = () => {
+    if (!storedResults) {
+      return null;
+    }
+
+    const renderResults = storedResults.map((r) => {
+      return (
+        <div className="flex flex-col gap-3">
+          <p className="text-zinc-900 font-bold tracking-tight dark:text-white">
+            {r.prompt}
+          </p>
+          <div className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
+            <CopyBlock
+              text={r.response}
+              language={language.value}
+              showLineNumbers={true}
+              theme={theme === "dark" ? atomOneDark : atomOneLight}
+              wrapLines={true}
+              codeBlock
+            />
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <div className="flex flex-col items-center gap-5">
+        <p className="text-zinc-900 text-4xl xs:text-2xl font-bold tracking-tight dark:text-white underline">
+          Previous Results
+        </p>
+        {renderResults}
+      </div>
+    );
+  };
+
   return (
     <Container>
       <Header />
@@ -133,6 +175,7 @@ const Home: React.FC = () => {
       >
         {renderOutput()}
       </InputArea>
+      {renderPrevResults()}
     </Container>
   );
 };
