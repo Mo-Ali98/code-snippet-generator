@@ -3,20 +3,16 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
 import { InputArea } from "../components/input-area/input-area";
-import {
-  a11yDark,
-  a11yLight,
-  atomOneDark,
-  atomOneLight,
-  CopyBlock,
-  dracula,
-} from "react-code-blocks";
+import { atomOneDark, atomOneLight, CopyBlock } from "react-code-blocks";
 import Select from "react-select";
 import { languageOptions, LanguageOption } from "../assets/select-data";
 import { useTheme } from "next-themes";
+import { useApp } from "../contexts/app-context";
+import { Result } from "../interfaces/results";
 
 const Home: React.FC = () => {
   const { theme } = useTheme();
+  const { setStoredResults, storedResults } = useApp();
   const [userInput, setUserInput] = useState<string>("");
   const [apiOutput, setApiOutput] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -43,13 +39,25 @@ const Home: React.FC = () => {
       const { output } = data;
       const text: string = output.text;
 
-      console.log("OpenAI replied...", text);
-
       setApiOutput(text);
+
+      const newResult: Result = {
+        prompt: userInput.trim(),
+        response: text.trim(),
+      };
+
+      const updateResults = [...storedResults, newResult];
+      setStoredResults(updateResults);
+
+      localStorage.setItem(
+        "generate-code-results",
+        JSON.stringify(updateResults)
+      );
+
       setLoading(false);
     } catch (error) {
       console.error(error);
-      setApiOutput("An error has occured");
+      setApiOutput("An error has occurred");
     }
   };
 
@@ -120,6 +128,41 @@ const Home: React.FC = () => {
     );
   }
 
+  const renderPrevResults = () => {
+    if (!storedResults) {
+      return null;
+    }
+
+    const renderResults = storedResults.map((r) => {
+      return (
+        <div className="flex flex-col gap-3" key={r.prompt}>
+          <p className="text-zinc-900 font-bold tracking-tight dark:text-white">
+            {r.prompt}
+          </p>
+          <div className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
+            <CopyBlock
+              text={r.response}
+              language={language.value}
+              showLineNumbers={true}
+              theme={theme === "dark" ? atomOneDark : atomOneLight}
+              wrapLines={true}
+              codeBlock
+            />
+          </div>
+        </div>
+      );
+    });
+
+    return (
+      <div className="flex flex-col items-center gap-5">
+        <p className="text-zinc-900 text-4xl xs:text-2xl font-bold tracking-tight dark:text-white underline">
+          Previous Results
+        </p>
+        {renderResults}
+      </div>
+    );
+  };
+
   return (
     <Container>
       <Header />
@@ -132,6 +175,7 @@ const Home: React.FC = () => {
       >
         {renderOutput()}
       </InputArea>
+      {renderPrevResults()}
     </Container>
   );
 };
