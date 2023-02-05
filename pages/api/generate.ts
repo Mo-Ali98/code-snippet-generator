@@ -6,8 +6,8 @@ const configuration = new Configuration({
 });
 
 const openAI = new OpenAIApi(configuration);
-
 const basePromptPrefix = "";
+
 const generateAction = async (req: NextApiRequest, res: NextApiResponse) => {
   // Run first prompt
   const baseCompletion = await openAI.createCompletion({

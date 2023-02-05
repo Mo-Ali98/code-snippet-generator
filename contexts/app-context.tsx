@@ -16,17 +16,13 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
   const [storedResults, setStoredResults] = React.useState<Result[]>([]);
 
   useEffect(() => {
-    localStorage.setItem("results", JSON.stringify(storedResults));
-    const data = JSON.parse(localStorage.getItem("results") || "[]");
-
+    const data = JSON.parse(
+      localStorage.getItem("generate-code-results") || "[]"
+    );
     if (data) {
       setStoredResults(data);
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("results", JSON.stringify(storedResults));
-  }, [storedResults]);
 
   return (
     <AppContext.Provider
