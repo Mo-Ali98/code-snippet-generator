@@ -32,43 +32,36 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
       }}
     >
       <Head>
-        <title>Generate Code!</title>
+        <title>Generate code snippets!</title>
+        <meta name="description" content="Generate code snippets using AI!" />
 
-        <meta
-          property="og:title"
-          content="Generate code snippets!"
-          key="title"
-        />
+        <meta property="og:url" content="https://my-gpt3-writer.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Generate code snippets!" />
         <meta
           property="og:description"
-          key="description"
           content="Generate code snippets using AI!"
         />
         <meta
           property="og:image"
           content="https://my-gpt3-writer.vercel.app/api/og"
         />
-        <meta name="twitter:card" content="summary_large_image"></meta>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="my-gpt3-writer.vercel.app" />
+        <meta
+          property="twitter:url"
+          content="https://my-gpt3-writer.vercel.app/"
         />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
+        <meta name="twitter:title" content="Generate code snippets!" />
+        <meta
+          name="twitter:description"
+          content="Generate code snippets using AI!"
         />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
+        <meta
+          name="twitter:image"
+          content="https://my-gpt3-writer.vercel.app/api/og"
         />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
       </Head>
       {children}
     </AppContext.Provider>
