@@ -11,7 +11,7 @@ import { useApp } from "../contexts/app-context";
 import { Result } from "../interfaces/results";
 
 const Home: React.FC = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const { setStoredResults, storedResults } = useApp();
   const [userInput, setUserInput] = useState<string>("");
   const [apiOutput, setApiOutput] = useState<string>("");
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
             text={apiOutput.trim()}
             language={language.value}
             showLineNumbers={true}
-            theme={theme === "dark" ? atomOneDark : atomOneLight}
+            theme={resolvedTheme === "dark" ? atomOneDark : atomOneLight}
             wrapLines={true}
             codeBlock
           />
@@ -129,7 +129,7 @@ const Home: React.FC = () => {
   }
 
   const renderPrevResults = () => {
-    if (!storedResults) {
+    if (!storedResults || storedResults.length < 1) {
       return null;
     }
 
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
               text={r.response}
               language={language.value}
               showLineNumbers={true}
-              theme={theme === "dark" ? atomOneDark : atomOneLight}
+              theme={resolvedTheme === "dark" ? atomOneDark : atomOneLight}
               wrapLines={true}
               codeBlock
             />

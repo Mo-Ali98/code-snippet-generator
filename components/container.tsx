@@ -7,7 +7,7 @@ interface ContainerProps {
 }
 
 export const Container: React.FC<ContainerProps> = ({ children }) => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,12 +19,12 @@ export const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
     <div className="container min-w-full min-h-screen bg-white dark:bg-zinc-900">
       <button
-        aria-label={`Toggle ${theme} Mode`}
+        aria-label={`Toggle ${resolvedTheme} Mode`}
         type="button"
         className="absolute top-2 right-3 p-2 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       >
-        {theme === "dark" ? (
+        {resolvedTheme === "dark" ? (
           <SunIcon width={28} height={28} className="text-white" />
         ) : (
           <MoonIcon width={28} height={28} className="text-zinc-900" />
