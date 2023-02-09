@@ -35,7 +35,10 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
         <title>Generate code snippets!</title>
         <meta name="description" content="Generate code snippets using AI!" />
 
-        <meta property="og:url" content="https://my-gpt3-writer.vercel.app/" />
+        <meta
+          property="og:url"
+          content="https://generate-code-snippets.vercel.app/"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Generate code snippets!" />
         <meta
@@ -44,14 +47,14 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
         />
         <meta
           property="og:image"
-          content="https://my-gpt3-writer.vercel.app/api/og"
+          content="https://generate-code-snippets.vercel.app/api/og"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="my-gpt3-writer.vercel.app" />
         <meta
           property="twitter:url"
-          content="https://my-gpt3-writer.vercel.app/"
+          content="https://generate-code-snippets.vercel.app/"
         />
         <meta name="twitter:title" content="Generate code snippets!" />
         <meta
@@ -60,7 +63,7 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
         />
         <meta
           name="twitter:image"
-          content="https://my-gpt3-writer.vercel.app/api/og"
+          content="https://generate-code-snippets.vercel.app/"
         />
       </Head>
       {children}
