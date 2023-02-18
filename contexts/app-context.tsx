@@ -51,7 +51,10 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
         />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="my-gpt3-writer.vercel.app" />
+        <meta
+          property="twitter:domain"
+          content="https://generate-code-snippets.vercel.app/"
+        />
         <meta
           property="twitter:url"
           content="https://generate-code-snippets.vercel.app/"

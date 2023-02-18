@@ -1,5 +1,5 @@
 {
-  "name": "my-gpt3-writer",
+  "name": "code-snippet-generator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
