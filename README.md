@@ -2,8 +2,7 @@
 
 An AI-powered tool that generates code snippets instantly. Whether you're a seasoned or a beginner developer, this tool makes coding faster, easier, and more efficient, helping you streamline your coding processes and increasing your productivity.
 
-<img width="1440" alt="Screenshot 2023-02-03 at 22 53 04" src="https://user-images.githubusercontent.com/41699093/216726099-48ef5b21-98f3-46e3-ac9b-f0e6406f3004.png">
-
+<img width="1440" alt="Screenshot 2023-02-18 at 15 59 32" src="https://user-images.githubusercontent.com/41699093/219875719-ddfd048c-006e-4a4c-9b94-07c006196b60.png">
 
 ## Getting Started
 First, install dependencies:
