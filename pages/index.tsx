@@ -135,7 +135,7 @@ const Home: React.FC = () => {
 
     const renderResults = storedResults.map((r) => {
       return (
-        <div className="flex flex-col gap-3" key={r.prompt}>
+        <div className="flex flex-col gap-3 items-center" key={r.prompt}>
           <p className="text-zinc-900 font-bold tracking-tight dark:text-white">
             {r.prompt}
           </p>

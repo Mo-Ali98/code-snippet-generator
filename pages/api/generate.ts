@@ -6,7 +6,8 @@ const configuration = new Configuration({
 });
 
 const openAI = new OpenAIApi(configuration);
-const basePromptPrefix = "";
+const basePromptPrefix =
+  "I want you to act as a software developer. I want you to provide some code based on the following description: ";
 
 const generateAction = async (req: NextApiRequest, res: NextApiResponse) => {
   // Run first prompt
