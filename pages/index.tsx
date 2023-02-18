@@ -35,6 +35,10 @@ const Home: React.FC = () => {
         body: JSON.stringify({ userInput }),
       });
 
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
       const data = await response.json();
       const { output } = data;
       const text: string = output.text;
@@ -119,15 +123,6 @@ const Home: React.FC = () => {
     );
   };
 
-  if (apiOutput) {
-    return (
-      <Container>
-        <Header />
-        {renderOutput()}
-      </Container>
-    );
-  }
-
   const renderPrevResults = () => {
     if (!storedResults || storedResults.length < 1) {
       return null;
@@ -162,6 +157,15 @@ const Home: React.FC = () => {
       </div>
     );
   };
+
+  if (apiOutput) {
+    return (
+      <Container>
+        <Header />
+        {renderOutput()}
+      </Container>
+    );
+  }
 
   return (
     <Container>

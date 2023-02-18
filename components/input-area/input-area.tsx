@@ -31,10 +31,10 @@ export const InputArea: React.FC<
       <div className={classNames(styles["prompt-buttons"])}>
         <button
           className={classNames(
-            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900"
+            "bg-white text-zinc-900 border-solid border-2 border-zinc-800 font-bold py-2 px-4 rounded-md hover:text-white hover:bg-zinc-900 dark:bg-zinc-900 dark:text-white dark:border-zinc-300 dark:hover:text-zinc-900 dark:hover:bg-white dark:hover:border-zinc-900 disabled:opacity-30 disabled:cursor-not-allowed"
           )}
           onClick={onGenerate}
-          disabled={loading}
+          disabled={loading || Boolean(!currentInput)}
         >
           {loading ? (
             <span

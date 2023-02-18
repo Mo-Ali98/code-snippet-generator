@@ -10,7 +10,10 @@ const basePromptPrefix =
   "I want you to act as a software developer. I want you to provide some code based on the following description: ";
 
 const generateAction = async (req: NextApiRequest, res: NextApiResponse) => {
-  // Run first prompt
+  if (!req.body.userInput) {
+    return new Response("No description in the request", { status: 400 });
+  }
+
   const baseCompletion = await openAI.createCompletion({
     model: "text-davinci-003",
     prompt: `${basePromptPrefix}${req.body.userInput}`,
