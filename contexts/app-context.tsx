@@ -66,7 +66,7 @@ export const AppProvider: React.FC<AppContextProps> = ({ children }) => {
         />
         <meta
           name="twitter:image"
-          content="https://generate-code-snippets.vercel.app/"
+          content="https://generate-code-snippets.vercel.app/api/og"
         />
       </Head>
       {children}
