@@ -41,13 +41,15 @@ const Home: React.FC = () => {
 
       const data = await response.json();
       const { output } = data;
-      const text: string = output.text;
+      const text: string = output;
+
+      console.log(text);
 
       setApiOutput(text);
 
       const newResult: Result = {
         prompt: userInput.trim(),
-        response: text.trim(),
+        response: text,
       };
 
       const updateResults = [...storedResults, newResult];
@@ -99,7 +101,7 @@ const Home: React.FC = () => {
 
         <div className="xs:min-w-[350px] min-h-[250px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
           <CopyBlock
-            text={apiOutput.trim()}
+            text={apiOutput}
             language={language.value}
             showLineNumbers={true}
             theme={resolvedTheme === "dark" ? atomOneDark : atomOneLight}
