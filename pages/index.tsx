@@ -3,14 +3,15 @@ import { useState } from "react";
 import { Container } from "../components/container";
 import { Header } from "../components/header";
 import { InputArea } from "../components/input-area/input-area";
-import { atomOneDark, atomOneLight, CopyBlock } from "react-code-blocks";
 import Select from "react-select";
-import { languageOptions, LanguageOption } from "../assets/select-data";
+import { languageOptions, LanguageOption } from "../utils/select-data";
 import { useTheme } from "next-themes";
 import { useApp } from "../contexts/app-context";
 import { Result } from "../interfaces/results";
+import { formatText } from "../utils/format-text";
+import { NextPage } from "next";
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   const { resolvedTheme } = useTheme();
   const { setStoredResults, storedResults } = useApp();
   const [userInput, setUserInput] = useState<string>("");
@@ -43,9 +44,7 @@ const Home: React.FC = () => {
       const { output } = data;
       const text: string = output;
 
-      console.log(text);
-
-      setApiOutput(text);
+      setApiOutput(text.trim());
 
       const newResult: Result = {
         prompt: userInput.trim(),
@@ -69,6 +68,8 @@ const Home: React.FC = () => {
 
   const renderOutput = () => {
     if (!apiOutput) return null;
+
+    const response = formatText(apiOutput, language, resolvedTheme);
 
     return (
       <div className="flex flex-col items-center gap-3">
@@ -100,14 +101,7 @@ const Home: React.FC = () => {
         </div>
 
         <div className="xs:min-w-[350px] min-h-[250px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
-          <CopyBlock
-            text={apiOutput}
-            language={language.value}
-            showLineNumbers={true}
-            theme={resolvedTheme === "dark" ? atomOneDark : atomOneLight}
-            wrapLines={true}
-            codeBlock
-          />
+          {response}
         </div>
 
         <button
@@ -131,20 +125,18 @@ const Home: React.FC = () => {
     }
 
     const renderResults = storedResults.map((r) => {
+      const codeBlock = formatText(r.response, language, resolvedTheme);
+
       return (
-        <div className="flex flex-col gap-3 items-center" key={r.prompt}>
-          <p className="text-zinc-900 font-bold tracking-tight dark:text-white">
+        <div
+          className="flex flex-col gap-3 items-center border border-slate-400/40 rounded-lg p-3"
+          key={r.prompt}
+        >
+          <p className="text-zinc-900 text-center font-bold tracking-tight dark:text-white max-w-[350px]">
             {r.prompt}
           </p>
-          <div className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[800px]">
-            <CopyBlock
-              text={r.response}
-              language={language.value}
-              showLineNumbers={true}
-              theme={resolvedTheme === "dark" ? atomOneDark : atomOneLight}
-              wrapLines={true}
-              codeBlock
-            />
+          <div className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[900px]">
+            {codeBlock}
           </div>
         </div>
       );
