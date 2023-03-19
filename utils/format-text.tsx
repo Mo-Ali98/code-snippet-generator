@@ -1,5 +1,5 @@
 import { CopyBlock, atomOneDark, atomOneLight } from "react-code-blocks";
-import { LanguageOption } from "./select-data";
+import { LanguageOption, languageOptions } from "./select-data";
 
 export const formatText = (
   text: string,

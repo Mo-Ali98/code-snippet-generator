@@ -10,6 +10,7 @@ import { useApp } from "../contexts/app-context";
 import { Result } from "../interfaces/results";
 import { formatText } from "../utils/format-text";
 import { NextPage } from "next";
+import { Accordion } from "../components/accordion";
 
 const Home: NextPage = () => {
   const { resolvedTheme } = useTheme();
@@ -128,27 +129,24 @@ const Home: NextPage = () => {
       const codeBlock = formatText(r.response, language, resolvedTheme);
 
       return (
-        <div
-          className="flex flex-col gap-3 items-center border border-slate-400/40 rounded-lg p-3"
-          key={r.prompt}
-        >
-          <p className="text-zinc-900 text-center font-bold tracking-tight dark:text-white max-w-[350px]">
-            {r.prompt}
-          </p>
-          <div className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[900px]">
+        <Accordion className="xs:min-w-[350px] max-w-xs sm:max-w-md md:min-w-[600px] lg:min-w-[900px]">
+          <Accordion.AccordionTab title={r.prompt}>
             {codeBlock}
-          </div>
-        </div>
+          </Accordion.AccordionTab>
+        </Accordion>
       );
     });
 
     return (
-      <div className="flex flex-col items-center gap-5">
-        <p className="text-zinc-900 text-4xl xs:text-2xl font-bold tracking-tight dark:text-white underline">
-          Previous Results
-        </p>
-        {renderResults}
-      </div>
+      <>
+        <div className="flex flex-col items-center gap-5">
+          <p className="text-zinc-900 text-4xl xs:text-2xl font-bold tracking-tight dark:text-white underline">
+            Generated code snippets
+          </p>
+
+          {renderResults}
+        </div>
+      </>
     );
   };
 
