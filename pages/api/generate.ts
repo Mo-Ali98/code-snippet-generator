@@ -7,7 +7,7 @@ const configuration = new Configuration({
 
 const openAI = new OpenAIApi(configuration);
 const basePromptPrefix =
-  "I want you to provide me code based on the following description in 50 lines maximum: ";
+  "I want you to provide me code based on the following description: ";
 
 const generateAction = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.body.userInput) {

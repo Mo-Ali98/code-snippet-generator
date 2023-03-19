@@ -42,7 +42,7 @@ export const InputArea: React.FC<
                 styles["loader"],
                 "border-t-zinc-900 border-r-zinc-900 dark:border-t-white"
               )}
-            ></span>
+            />
           ) : (
             <p className="font-normal">Generate</p>
           )}
