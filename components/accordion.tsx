@@ -56,7 +56,7 @@ const AccordionTab: React.FC<AccordionTabProps> = ({
     <>
       <button
         className={classNames(
-          "flex w-full cursor-pointer select-none items-center justify-between gap-4 rounded-t-md py-4 px-5 text-left focus-visible:border focus-visible:border-accent-1-500 border dark:text-white border-slate-400/40",
+          "flex w-full cursor-pointer select-none items-center justify-between gap-4 rounded-t-md py-4 px-5 text-left focus-visible:border focus-visible:border-accent-1-500 border dark:text-white border-slate-400",
           {
             ["text-neutral-200"]: disabled,
             ["rounded-b-md"]: !isOpen,
@@ -77,7 +77,7 @@ const AccordionTab: React.FC<AccordionTabProps> = ({
       {isOpen && (
         <div
           className={classNames(
-            "px-5 py-4 border-b border-x rounded-b-md border-slate-400/40",
+            "px-5 py-4 border-b border-x rounded-b-md border-slate-400",
             contentClassName
           )}
         >
